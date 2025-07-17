@@ -24,6 +24,10 @@ PID_FILE="/tmp/openvpn.pid"
 
 echo "Connecting to VPN..."
 sudo openvpn --config "$CONFIG" --daemon --writepid "$PID_FILE"
+if [ $? -ne 0 ]; then
+  echo "Error: failed to start openvpn"
+  exit 1
+fi
 
 for i in {1..15}; do
   sleep 1
@@ -32,6 +36,24 @@ for i in {1..15}; do
     break
   fi
 done
+
+if [[ "$CURRENT_IP" == "" ]]; then
+  echo "Error: failed to obtain external IP address"
+  if [[ -f "$PID_FILE" ]]; then
+    sudo kill "$(cat "$PID_FILE")"
+    rm "$PID_FILE"
+  fi
+  exit 1
+fi
+
+if [[ ! "$CURRENT_IP" =~ ^([0-9]{1,3}\.){3}[0-9]{1,3}$ ]]; then
+  echo "Error: obtained value is not a valid IP address: '$CURRENT_IP'"
+  if [[ -f "$PID_FILE" ]]; then
+    sudo kill "$(cat "$PID_FILE")"
+    rm "$PID_FILE"
+  fi
+  exit 1
+fi
 
 echo "Current external IP: $CURRENT_IP"
 
