@@ -11,6 +11,12 @@ if ! command -v curl >/dev/null 2>&1; then
 fi
 
 CONFIG="/path/to/your.ovpn"
+
+if [ ! -f "$CONFIG" ]; then
+  echo "Error: config file '$CONFIG' does not exist"
+  exit 1
+fi
+
 TEST_URL="https://ifconfig.me"
 EXPECTED_VPN_IP="XXX.XXX.XXX.XXX"
 
