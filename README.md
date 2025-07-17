@@ -39,6 +39,8 @@ EXPECTED_VPN_IP="XXX.XXX.XXX.XXX"
 
 ## Usage
 
+Before running the script, manually disconnect all active VPN connections in your system settings or VPN clients. Having another VPN active may interfere with the check.
+
 ```sh
 u7vpncheck
 ```
