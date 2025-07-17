@@ -1,5 +1,15 @@
 #!/bin/bash
 
+if ! command -v openvpn >/dev/null 2>&1; then
+  echo "Error: openvpn is not installed"
+  exit 1
+fi
+
+if ! command -v curl >/dev/null 2>&1; then
+  echo "Error: curl is not installed"
+  exit 1
+fi
+
 CONFIG="/path/to/your.ovpn"
 TEST_URL="https://ifconfig.me"
 EXPECTED_VPN_IP="XXX.XXX.XXX.XXX"
