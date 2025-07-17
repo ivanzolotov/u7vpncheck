@@ -40,7 +40,7 @@ if [[ "$CURRENT_IP" == "" ]]; then
   echo "Error: failed to obtain external IP address"
   if [[ -f "$PID_FILE" ]]; then
     sudo kill "$(cat "$PID_FILE")"
-    rm "$PID_FILE"
+    sudo rm "$PID_FILE"
   fi
   exit 1
 fi
@@ -49,7 +49,7 @@ if [[ ! "$CURRENT_IP" =~ ^([0-9]{1,3}\.){3}[0-9]{1,3}$ ]]; then
   echo "Error: obtained value is not a valid IP address: '$CURRENT_IP'"
   if [[ -f "$PID_FILE" ]]; then
     sudo kill "$(cat "$PID_FILE")"
-    rm "$PID_FILE"
+    sudo rm "$PID_FILE"
   fi
   exit 1
 fi
@@ -67,7 +67,7 @@ fi
 if [[ -f "$PID_FILE" ]]; then
   echo "Disconnecting VPN..."
   sudo kill "$(cat "$PID_FILE")"
-  rm "$PID_FILE"
+  sudo rm "$PID_FILE"
 fi
 
 exit $STATUS
