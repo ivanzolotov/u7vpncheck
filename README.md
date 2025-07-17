@@ -30,7 +30,7 @@ source ~/.zshrc
 
 ## Configuration
 
-Edit the script (`u7vpncheck.sh`) and set the following values:
+Create a file named `u7vpncheck.conf` in the same directory as the script with the following content:
 
 ```bash
 CONFIG="/path/to/your.ovpn"
