@@ -10,7 +10,7 @@ if ! command -v curl >/dev/null 2>&1; then
   exit 1
 fi
 
-CONF_FILE="$(dirname "$0")/u7vpncheck.conf"
+CONF_FILE="$(dirname "$(realpath "$0")")/u7vpncheck.conf"
 if [ ! -f "$CONF_FILE" ]; then
   echo "Error: config file '$CONF_FILE' does not exist"
   exit 1
